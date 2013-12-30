@@ -33,10 +33,20 @@ module.exports = function(grunt) {
             }
         }
     },
+    concat: {
+      js: {
+        src: ['js/src/vendor/**/*.js','js/src/api/**/*.js','js/src/helpers/**/*.js','js/src/core/**/*.js'],
+        dest: 'js/main.js'
+      }
+    },
     watch: {
         all: {
           options: { livereload: true },
           files: ['index.html','css/sass/**/*.scss','js/*.js']
+        },
+        concat: {
+          files: ['js/src/**/*.js'],
+          tasks: "concat"
         },
         sass: {
             options: {
@@ -52,9 +62,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'uglify']);
+  grunt.registerTask('default', ['concat','jshint', 'uglify']);
 
 };
