@@ -13,6 +13,14 @@ var iTunes = (function() {
 				self.get.cache = jQuery.parseJSON(local_cache);
 			}
 		},
+		helpers: {
+			addLargeImage: function(item, size) {
+				var album_cover = item["im:image"][item["im:image"].length-1].label;
+				var album_cover_large = album_cover.replace("170x170", size + "x" + size);
+				item["im:image"].push({label: album_cover_large});
+				return item;
+			}
+		},
 		get: {
 			cache: {},
 			options: {
@@ -56,6 +64,9 @@ var iTunes = (function() {
 				self.get.request({item: "topalbums"}).then(function(data) {
 					var albums = data.feed.entry;
 					var random = _.shuffle(albums)[0];
+
+					self.helpers.addLargeImage(random, 400);
+					
 					promise.resolve(random);
 				});
 				return promise;
