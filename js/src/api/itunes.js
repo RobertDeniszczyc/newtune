@@ -66,7 +66,7 @@ var iTunes = (function() {
 					var random = _.shuffle(albums)[0];
 
 					self.helpers.addLargeImage(random, 400);
-					
+
 					promise.resolve(random);
 				});
 				return promise;

@@ -19,6 +19,7 @@ var iTunes = (function() {
 				self.get.cache = jQuery.parseJSON(local_cache);
 			}
 		},
+
 		helpers: {
 			addLargeImage: function(item, size) {
 				var album_cover = item["im:image"][item["im:image"].length-1].label;
@@ -70,9 +71,12 @@ var iTunes = (function() {
 				self.get.request({item: "topalbums"}).then(function(data) {
 					var albums = data.feed.entry;
 					var random = _.shuffle(albums)[0];
+<<<<<<< HEAD
 
 					self.helpers.addLargeImage(random, 400);
 					
+=======
+>>>>>>> d0befcf22c199be99e44261c9325c7ace915cd15
 					promise.resolve(random);
 				});
 				return promise;
